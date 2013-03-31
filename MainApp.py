@@ -9,8 +9,8 @@ from instagram import client
 bottle.debug(True)
 
 CONFIG = {
-    'client_id': '0ea645d694774abdab959b2df648300b',
-    'client_secret': 'd5eac27ee62043f5b46fe2829babd800',
+    'client_id': client_id,
+    'client_secret': client_secret,
     'redirect_uri': 'http://pvigram.herokuapp.com/gallery'
 }
 
@@ -81,7 +81,7 @@ def on_request():
         api = client.InstagramAPI(access_token=at)
 	media=api.media(mediaId)
 
-        conn = boto.connect_s3("AKIAIKNCWWF7FBMHXNNQ", "r+mxYNOC2+4ghvmrTJzev2n7KxiXk5zLDxMenYCM")
+        conn = boto.connect_s3(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
         bucket = conn.get_bucket("picovico")
 	url = media.get_standard_resolution_url()
 
